@@ -21,7 +21,7 @@ import java.util.Properties;
  * JPAConfig
  *
  * @author Allen Jin
- * @date 2015-11-06
+ * @date 2015-11-20
  */
 
 @Configuration

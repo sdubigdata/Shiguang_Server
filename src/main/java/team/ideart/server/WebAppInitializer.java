@@ -12,7 +12,7 @@ import javax.servlet.ServletRegistration;
  * WebAppInitializer
  *
  * @author Allen Jin
- * @date 2015-11-06
+ * @date 2015-11-20
  */
 public class WebAppInitializer implements WebApplicationInitializer {
 
