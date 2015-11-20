@@ -1,0 +1,23 @@
+# Created by .ignore support plugin (hsz.mobi)
+.DS_Store
+
+#gradle settings#
+/.gradle
+/build
+
+#idea settings#
+/.settings
+/.idea
+/GLMS_Server.iws
+/GLMS_Server.ipr
+/GLMS_Server.iml
+/out
+
+#eclipse settings#
+/.classpath
+/.project
+/bin
+
+## Package Files ##
+/*.war
+/*.ear
