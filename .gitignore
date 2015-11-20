@@ -9,9 +9,9 @@
 #idea settings#
 /.settings
 /.idea
-/GLMS_Server.iws
-/GLMS_Server.ipr
-/GLMS_Server.iml
+/Shiguang_Server.iml
+/Shiguang_Server.iws
+/Shiguang_Server.ipr
 /out
 
 #eclipse settings#
