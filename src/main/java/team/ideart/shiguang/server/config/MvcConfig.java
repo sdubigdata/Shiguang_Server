@@ -1,4 +1,4 @@
-package team.ideart.server.config;
+package team.ideart.shiguang.server.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -19,7 +19,7 @@ import java.util.List;
 @Configuration
 @EnableWebMvc
 @Import(JPAConfig.class)
-@ComponentScan(basePackages = {"team.ideart.server.controller"})
+@ComponentScan(basePackages = {"team.ideart.shiguang.server.controller"})
 public class MvcConfig extends WebMvcConfigurerAdapter {
 
     /**

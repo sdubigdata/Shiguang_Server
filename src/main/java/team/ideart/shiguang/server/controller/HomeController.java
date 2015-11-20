@@ -1,4 +1,4 @@
-package team.ideart.server.controller;
+package team.ideart.shiguang.server.controller;
 
 
 import org.springframework.stereotype.Controller;
@@ -11,13 +11,13 @@ public class HomeController {
 
     @RequestMapping(value = "/test1", method = RequestMethod.GET)
     @ResponseBody
-    public String test1(){
+    public String test1() {
         return "test2";
     }
 
 
     @RequestMapping("/")
-    public String index(){
+    public String index() {
         return "home";
     }
 }

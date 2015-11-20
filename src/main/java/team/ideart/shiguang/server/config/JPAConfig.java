@@ -1,4 +1,4 @@
-package team.ideart.server.config;
+package team.ideart.shiguang.server.config;
 
 import org.apache.commons.dbcp.BasicDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,8 +27,8 @@ import java.util.Properties;
 @Configuration
 @EnableTransactionManagement
 @PropertySource(value = "classpath:jdbc.properties")
-@ComponentScan({"team.ideart.server.persist","team.ideart.server.service"})
-@EnableJpaRepositories("team.ideart.server.persist")
+@ComponentScan({"team.ideart.shiguang.server.persist","team.ideart.shiguang.server.service"})
+@EnableJpaRepositories("team.ideart.shiguang.server.persist")
 public class JPAConfig {
 
     @Resource
@@ -74,7 +74,7 @@ public class JPAConfig {
         HibernateJpaVendorAdapter jpaVendorAdapter = new HibernateJpaVendorAdapter();
         factory.setJpaVendorAdapter(jpaVendorAdapter);
         factory.setDataSource(dataSource());
-        factory.setPackagesToScan("team.ideart.server.persist");
+        factory.setPackagesToScan("team.ideart.shiguang.server.persist");
         factory.setJpaProperties(hibProperties());
         return factory;
     }
