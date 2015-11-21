@@ -1,5 +1,7 @@
 package team.ideart.shiguang.server.persist.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -20,6 +22,7 @@ public class User {
 
     private String userName;    //用户名
 
+    @JsonIgnore
     private String password;    //密码
 
     private String avatar;      //头像
@@ -30,12 +33,15 @@ public class User {
 
     private String email;   //邮箱
 
+    @JsonIgnore
     @ManyToMany(mappedBy = "userList")
     private List<Achievement> achievementList;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "user")
     private List<Post> postList;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "user")
     private List<Post> labelList;
     public Integer getId() {

@@ -21,6 +21,7 @@ import team.ideart.shiguang.server.util.SecurityUtil;
 import team.ideart.shiguang.server.util.UploadUtil;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
 import java.util.Date;
@@ -40,9 +41,9 @@ public class UploadController {
 
     @RequestMapping(value = "/uploadMultipart", method = RequestMethod.POST)
     @ResponseBody
-    public MultipartUploadResponse uploadMultipart(@RequestParam(name = "token") String token, @RequestParam(name = Constants.MULTIPART_UPLOAD_FILE) MultipartFile file) {
-        WebApplicationContext webApplicationContext = ContextLoader.getCurrentWebApplicationContext();
-        ServletContext servletContext = webApplicationContext.getServletContext();
+    public MultipartUploadResponse uploadMultipart(@RequestParam(name = "token") String token, @RequestParam(name = Constants.MULTIPART_UPLOAD_FILE) MultipartFile file, HttpServletRequest request) {
+        ServletContext servletContext = request.getServletContext();
+        String realPath = servletContext.getRealPath("/");
         User user = SecurityUtil.getLoginUser(servletContext, token);
         MultipartUploadResponse response = new MultipartUploadResponse();
         if (null == user) {
@@ -50,9 +51,14 @@ public class UploadController {
         } else {
             String filename = file.getOriginalFilename();
             try {
-                File source = new File(UploadUtil.generateFilePath(user, filename));
+                String relativePath = UploadUtil.generateFilePath(user, filename);
+                File source = new File(realPath + relativePath);
+                if (!source.getParentFile().exists()) {
+                    source.getParentFile().mkdirs();
+                }
                 file.transferTo(source);
                 response.setCode(MultipartUploadResponse.SUCCESS);
+                response.setMultipartPath(relativePath);
             } catch (IOException e) {
                 e.printStackTrace();
                 response.setCode(MultipartUploadResponse.ERROR);
@@ -63,9 +69,8 @@ public class UploadController {
 
     @RequestMapping(value = "/uploadPost", method = RequestMethod.POST)
     @ResponseBody
-    public PostUploadResponse uploadPost(@RequestParam(name = "token") String token, @RequestParam(name = "path") String path, @RequestParam(name = "content") String content, @RequestParam(name = "date") Date date, @RequestParam(name = "color") int color, @RequestParam(name = "labelList") List<Label> labelList, @RequestParam(name = "weather") String weather) {
-        WebApplicationContext webApplicationContext = ContextLoader.getCurrentWebApplicationContext();
-        ServletContext servletContext = webApplicationContext.getServletContext();
+    public PostUploadResponse uploadPost(@RequestParam(name = "token") String token, @RequestParam(name = "path") String path, @RequestParam(name = "content") String content, @RequestParam(name = "date", required = false) Date date, @RequestParam(name = "color") int color, @RequestParam(name = "labelList", required = false) List<Label> labelList, @RequestParam(name = "weather") String weather, HttpServletRequest request) {
+        ServletContext servletContext = request.getServletContext();
         User user = SecurityUtil.getLoginUser(servletContext, token);
         PostUploadResponse response = new PostUploadResponse();
         if (null == user) {
@@ -74,6 +79,7 @@ public class UploadController {
             Post post = new Post();
             post.setColor(color);
             post.setContent(content);
+            date = new Date(System.currentTimeMillis());
             post.setDate(date);
             post.setLabelList(labelList);
             post.setPath(path);

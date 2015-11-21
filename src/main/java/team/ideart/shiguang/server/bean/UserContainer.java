@@ -29,12 +29,12 @@ public class UserContainer {
     }
 
     public String generateRandomToken(String userName) {
-        return userName + " " + UUID.randomUUID().toString();
+        return userName + "/" + UUID.randomUUID().toString();
     }
 
     public String getUserNameFromToken(String token) {
-        if (null != token && token.indexOf(" ") > 0) {
-            return token.substring(0, token.indexOf(" "));
+        if (null != token && token.indexOf("/") > 0) {
+            return token.substring(0, token.indexOf("/"));
         }
         return null;
     }
@@ -42,7 +42,7 @@ public class UserContainer {
     public int addUser(User user, String token) {
         if (!tokenUserMap.containsKey(token) && !tokenUserMap.containsValue(user)) {
             synchronized (this) {
-                if (tokenUserMap.containsKey(token) || tokenUserMap.containsValue(user)) {
+                if (!tokenUserMap.containsKey(token) && !tokenUserMap.containsValue(user)) {
                     tokenUserMap.put(token, user);
                 } else {
                     return LoginResponse.ALREADY_LOGIN;

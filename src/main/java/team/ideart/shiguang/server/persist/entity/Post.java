@@ -1,5 +1,7 @@
 package team.ideart.shiguang.server.persist.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
@@ -38,6 +40,7 @@ public class Post {
 
     private String path;
 
+    @JsonIgnore
     @ManyToMany(mappedBy = "postList")
     private List<Label> labelList;
 
