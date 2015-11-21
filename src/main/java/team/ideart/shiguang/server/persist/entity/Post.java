@@ -27,7 +27,7 @@ public class Post {
 
     private String content;    //内容
 
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date date;    //时间
 
     private String weather;      //天气

@@ -6,8 +6,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.context.ContextLoader;
-import org.springframework.web.context.WebApplicationContext;
 import team.ideart.shiguang.server.persist.dao.PostDAO;
 import team.ideart.shiguang.server.json.AResponse;
 import team.ideart.shiguang.server.json.ListResponse;

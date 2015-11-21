@@ -35,8 +35,8 @@ public class LoginController {
         String passwordSHA = Encrypt.SHA(password);
         LoginResponse response = new LoginResponse();
         int code = LoginResponse.WRONG_INFO;
-        //User user = userDAO.findByUserNameAndPassword(username, passwordSHA);
-        User user = userDAO.findAll().get(0);
+        User user = userDAO.findByUserNameAndPassword(username, passwordSHA);
+        //User user = userDAO.findAll().get(0);
         if (null != user) {
             code = LoginResponse.ALREADY_LOGIN;
             ServletContext servletContext = request.getServletContext();
